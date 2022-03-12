@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'bloghub-api'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2B3139E0B38B4E3195B9B081D4763BF0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1AC7DAB68F9C4A0D9CAD75E4B33D47CF }}
           package: .
