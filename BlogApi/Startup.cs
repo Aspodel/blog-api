@@ -75,8 +75,8 @@ namespace BlogApi
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 1;
 
-                options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = false;
+                options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserManager<UserManager>()
