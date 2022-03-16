@@ -90,15 +90,16 @@ namespace BlogApi
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 1;
 
-                options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = false;
+                options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddRoles<Role>()
                 .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<Author, Role>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserManager<AuthorManager>()
-                .AddTokenProvider<EmailConfirmationTokenProvider<Author>>("emailConfirmation")
-                .AddTokenProvider<PasswordResetTokenProvider<Author>>("passwordReset");
+                .AddTokenProvider<DataProtectorTokenProvider<Author>>(TokenOptions.DefaultProvider);
+                //.AddTokenProvider<EmailConfirmationTokenProvider<Author>>("emailConfirmation")
+                //.AddTokenProvider<PasswordResetTokenProvider<Author>>("passwordReset");
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -107,6 +108,7 @@ namespace BlogApi
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            //Create SMTP Client
             services.AddScoped(provider =>
             {
                 var config = provider.GetRequiredService<IOptionsMonitor<EmailConfig>>().CurrentValue;

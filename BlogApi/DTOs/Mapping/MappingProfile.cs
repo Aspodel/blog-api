@@ -20,6 +20,12 @@ namespace BlogApi.DTOs.Mapping
             CreateMap<UserDTO, User>()
                 .ForMember(d => d.Guid, opt => opt.Ignore());
             CreateMap<CreateUserDTO, User>();
+            
+            CreateMap<Author, AuthorDTO>()
+                .ForMember(d => d.Roles, opt => opt.MapFrom(s => s.UserRoles.Select(ur => ur.Role!.Name)));
+            CreateMap<AuthorDTO, Author>()
+                .ForMember(d => d.Guid, opt => opt.Ignore());
+            CreateMap<CreateUserDTO, Author>();
 
             CreateMap<Blog, BlogDTO>();
             CreateMap<BlogDTO, Blog>()

@@ -40,7 +40,7 @@ namespace BlogApi.Utils
     {
         public EmailConfirmationTokenProviderOptions()
         {
-            Name = "PasswordResetTokenProvider";
+            Name = "EmailConfirmationTokenProvider";
             TokenLifespan = TimeSpan.FromDays(3);
         }
     }

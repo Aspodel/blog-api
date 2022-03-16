@@ -164,13 +164,9 @@ namespace BlogApi.Controllers
             string confirmUrl = $"{baseUrl}/api/users/ConfirmEmail?guid={author.Guid}&token={validEmailToken}";
 
 
-            // Get email template
-            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\EmailConfirmation.html";
-            StreamReader str = new(FilePath);
-            string templateBody = str.ReadToEnd();
-            str.Close();
+            //Get email template
+            string templateBody = _emailService.GetTemplate(TemplateType.EmailConfirmation);
             templateBody = templateBody.Replace("[username]", author.UserName).Replace("[confirmUrl]", confirmUrl);
-
 
             EmailModel emailModel = new()
             {
