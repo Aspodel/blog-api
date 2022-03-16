@@ -30,7 +30,8 @@ namespace BlogApi.Services
 
         public string GetTemplate(string type)
         {
-            string FilePath = Directory.GetCurrentDirectory() + $"\\Templates\\{type}.html";
+            string FileName = type + ".html";
+            string FilePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", FileName);
             StreamReader str = new(FilePath);
             string templateBody = str.ReadToEnd();
             str.Close();
