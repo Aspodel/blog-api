@@ -97,9 +97,9 @@ namespace BlogApi
                 .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<Author, Role>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserManager<AuthorManager>()
-                .AddTokenProvider<DataProtectorTokenProvider<Author>>(TokenOptions.DefaultProvider);
-                //.AddTokenProvider<EmailConfirmationTokenProvider<Author>>("emailConfirmation")
-                //.AddTokenProvider<PasswordResetTokenProvider<Author>>("passwordReset");
+                // .AddTokenProvider<DataProtectorTokenProvider<Author>>(TokenOptions.DefaultProvider);
+                .AddTokenProvider<EmailConfirmationTokenProvider<Author>>("emailConfirmation")
+                .AddTokenProvider<PasswordResetTokenProvider<Author>>("passwordReset");
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -171,6 +171,8 @@ namespace BlogApi
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogApi v1"));
 
             app.UseHttpsRedirection();
+            
+            app.UseStaticFiles();
 
             app.UseCors("ClientPermission");
 

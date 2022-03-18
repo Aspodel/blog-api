@@ -26,6 +26,8 @@ namespace BlogApi.Repository
             ILogger<UserManager<Author>> logger
         ) : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
+            RegisterTokenProvider(TokenOptions.DefaultProvider, new EmailTokenProvider<Author>());
+            //RegisterTokenProvider(TokenOptions.DefaultProvider, new <Author>());
         }
 
         public async Task<Author?> FindByGuidAsync(string guid)
