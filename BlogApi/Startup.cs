@@ -153,7 +153,7 @@ namespace BlogApi
                 {
                     policy.AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3000")
+                        .WithOrigins("http://localhost:3000", "https://blog-hub.netlify.app")
                         .AllowCredentials();
                 });
             });
@@ -171,8 +171,8 @@ namespace BlogApi
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogApi v1"));
 
             app.UseHttpsRedirection();
-            
-            app.UseStaticFiles();
+
+            //app.UseStaticFiles();
 
             app.UseCors("ClientPermission");
 

@@ -57,7 +57,8 @@ namespace BlogApi.Controllers
             {
                 var foundAuthor = await _authorManager.FindByGuidAsync(author);
                 if (foundAuthor is null)
-                    return NotFound($"AuthorGuid {author} not found");
+                    continue;
+                // return NotFound($"AuthorGuid {author} not found");
 
                 blog.Authors.Add(foundAuthor);
             }
@@ -67,14 +68,15 @@ namespace BlogApi.Controllers
             {
                 var foundCategory = await _categoryRepository.FindByIdAsync(category);
                 if (foundCategory is null)
-                    return NotFound($"CategoryId {category} not found");
+                    continue;
+                // return NotFound($"CategoryId {category} not found");
 
                 blog.Categories.Add(foundCategory);
             }
 
             _blogRepository.Add(blog);
             await _blogRepository.SaveChangesAsync(cancellationToken);
-            return CreatedAtAction(nameof(Get), new { blog.Id }, _mapper.Map<UserDTO>(blog));
+            return CreatedAtAction(nameof(Get), new { blog.Id }, _mapper.Map<BlogDTO>(blog));
         }
 
         [HttpPut("{id}")]
